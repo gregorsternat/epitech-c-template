@@ -13,7 +13,7 @@ OBJ    =    $(SRC:.c=.o)
 
 NAME_LIB   =    libmy.a
 
-NAME_HEADER    =	coucou.h
+NAME_HEADER    =
 
 all: $(NAME_LIB)
 
