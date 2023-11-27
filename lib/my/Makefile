@@ -22,13 +22,13 @@ PURPLE_C    =	"\033[38;2;157;0;230m" # 157, 0, 230
 
 define success_lib
 	$(ECHO) $(BOLD_T)$(UNDERLINE_T)$(GREEN_C)"\n[✔] COMPILED: $(SRC)"$(DEFAULT)
-	$(ECHO) $(BOLD_T)$(UNDERLINE_T)$(GREEN_C)"\n[✔] COMPILED:"$(DEFAULT)$(LIGHT_GREEN)		\
-	"$(1)\n"$(DEFAULT)
+	$(ECHO) $(BOLD_T)$(UNDERLINE_T)$(GREEN_C)"\n[✔] COMPILED:" \
+	$(DEFAULT)$(LIGHT_GREEN)"$(1)\n"$(DEFAULT)
 endef
 
 define fail_lib
-	$(ECHO) $(BOLD_T)$(UNDERLINE_T)$(RED_C)"[✘] BUILD FAILED:"$(DEFAULT)$(LIGHT_RED)		\
-	"$(1)\n"$(DEFAULT)
+	$(ECHO) $(BOLD_T)$(UNDERLINE_T)$(RED_C)"[✘] BUILD FAILED:" \
+	$(DEFAULT)$(LIGHT_RED)"$(1)\n"$(DEFAULT)
 endef
 
 RM	= 	rm -f
@@ -46,7 +46,8 @@ all: $(NAME_LIB)
 $(NAME_LIB): $(OBJ)
 	@ar rc $(NAME_LIB) $(OBJ) && $(call success_lib, $(NAME_LIB))  \
     || $(call fail_lib, $(NAME_LIB))
-	@cp $(NAME_HEADER) ../../include/ && $(ECHO) $(ORANGE_C)$(BOLD_T)"\n[COPIED]:"	\
+	@cp $(NAME_HEADER) ../../include/ \
+	&& $(ECHO) $(ORANGE_C)$(BOLD_T)"\n[COPIED]:"	\
 	$(DEFAULT) $(YELLOW_C)"$(NAME_HEADER) in include folder"$(DEFAULT)
 
 clean:
@@ -58,4 +59,3 @@ fclean: clean
 	$(RM) $(NAME_LIB)
 	@$(ECHO) $(PURPLE_C)$(BOLD_T)"[FCLEAN]"$(DEFAULT) $(PURPLE_C)	\
     "DELETED: "$(DEFAULT) $(LIGHT_PURPLE)"$(NAME_LIB) binary"$(DEFAULT)
-

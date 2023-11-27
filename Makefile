@@ -36,14 +36,15 @@ LIB_PATH	=	./lib/my
 LIB_FLAG		=	-L$(LIB_PATH) -lmy
 
 define success
-	$(ECHO) $(BOLD_T)$(UNDERLINE_T)$(GREEN_C)"\n[✔] COMPILED: $(MAIN_SRC) $(SRC)"$(DEFAULT)
-	$(ECHO) $(BOLD_T)$(UNDERLINE_T)$(GREEN_C)"\n[✔] COMPILED:"$(DEFAULT)$(LIGHT_GREEN)		\
-	"$(1)\n"$(DEFAULT)
+	$(ECHO) $(BOLD_T)$(UNDERLINE_T)$(GREEN_C)"\n[✔] COMPILED:" \
+	$(DEFAULT)$(LIGHT_GREEN)" $(MAIN_SRC) $(SRC)"$(DEFAULT)
+	$(ECHO) $(BOLD_T)$(UNDERLINE_T)$(GREEN_C)"\n[✔] COMPILED:" \
+	$(DEFAULT)$(LIGHT_GREEN) "$(1)\n"$(DEFAULT)
 endef
 
 define fail
-	$(ECHO) $(BOLD_T)$(UNDERLINE_T)$(RED_C)"[✘] BUILD FAILED:"$(DEFAULT)$(LIGHT_RED)		\
-	"$(1)\n"$(DEFAULT)
+	$(ECHO) $(BOLD_T)$(UNDERLINE_T)$(RED_C)"[✘] BUILD FAILED:" \
+	$(DEFAULT)$(LIGHT_RED)"$(1)\n"$(DEFAULT)
 endef
 
 .PHONY: all clean fclean re tests_clean tests_run
@@ -52,13 +53,13 @@ all: $(NAME)
 
 $(NAME):
 	@make -C $(LIB_PATH)
-	@$(CC) $(MAIN_SRC) $(SRC) -o $(NAME) $(LIB_FLAG) $(CFLAGS) && $(call success, $(NAME))  \
-	|| $(call fail, $(NAME))
+	@$(CC) $(MAIN_SRC) $(SRC) -o $(NAME) $(LIB_FLAG) $(CFLAGS) && \
+	$(call success, $(NAME)) || $(call fail, $(NAME))
 
 tests_run: fclean
 	@make -C $(LIB_PATH)
-	@$(CC) $(SRC) $(SRC_TEST) $(CFLAGS) -o $(NAME_TEST) $(CRT_FLAGS) $(LIB_FLAG) && 		\
-	$(call success, $(NAME)) || $(call fail, $(NAME))
+	@$(CC) $(SRC) $(SRC_TEST) $(CFLAGS) -o $(NAME_TEST) $(CRT_FLAGS) \
+ 	$(LIB_FLAG) && $(call success, $(NAME)) || $(call fail, $(NAME))
 	@$(ECHO) $(BLUE_C)$(BOLD_T)"\n[TESTS]: "$(DEFAULT)
 	@./$(NAME_TEST)
 
@@ -68,8 +69,8 @@ coverage: tests_run
 
 valgrind: fclean
 	@make -C $(LIB_PATH)
-	@$(CC) $(MAIN_SRC) $(SRC) -o $(NAME) $(LIB_FLAG) -g3 && $(call success, $(NAME))  \
-    || $(call fail, $(NAME))
+	@$(CC) $(MAIN_SRC) $(SRC) -o $(NAME) $(LIB_FLAG) -g3 \
+	&& $(call success, $(NAME)) || $(call fail, $(NAME))
 
 clean: tests_clean
 	@make clean -C $(LIB_PATH)
