@@ -29,7 +29,7 @@ SRC 	=
 SRC_TEST	=
 MAIN_SRC	= 	./src/main.c
 
-NAME	=	setting_up
+NAME	=
 NAME_TEST	=	unit_tests
 
 LIB_PATH	=	./lib/my
@@ -69,7 +69,7 @@ coverage: tests_run
 
 valgrind: fclean
 	@make -C $(LIB_PATH)
-	@$(CC) $(MAIN_SRC) $(SRC) -o $(NAME) $(LIB_FLAG) -g3 \
+	@$(CC) $(MAIN_SRC) $(SRC) -o $(NAME) $(LIB_FLAG) $(CFLAGS) -g3 \
 	&& $(call success, $(NAME)) || $(call fail, $(NAME))
 
 clean: tests_clean
